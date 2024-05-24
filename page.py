@@ -49,13 +49,13 @@ def ProcessPage(paper):
             for j in range(0, 5):  # respuestas
                 # coordenadas de la burbuja de respuesta
                 x1 = int((columns[k][0] + j*spacing[0] -
-                         radius*1.5)*dimensions[0] + corners[0][0])
+                         radius*1.5)*dimensions[0] + corners[0][0] + 5)
                 y1 = int((columns[k][1] + i*spacing[1] - radius)
-                         * dimensions[1] + corners[0][1])
+                         * dimensions[1] + corners[0][1] - 5.2)
                 x2 = int((columns[k][0] + j*spacing[0] +
-                         radius*1.5)*dimensions[0] + corners[0][0])
+                         radius*1.5)*dimensions[0] + corners[0][0] + 5)
                 y2 = int((columns[k][1] + i*spacing[1] + radius)
-                         * dimensions[1] + corners[0][1])
+                         * dimensions[1] + corners[0][1] - 5.2)
 
                 # dibujar rectángulos alrededor de las burbujas
                 cv2.rectangle(paper, (x1, y1), (x2, y2),
