@@ -1,9 +1,3 @@
-"""
-app.py
-Este archivo contiene el código para la aplicación web. Y también contiene el código para procesar las imágenes de los documentos de respuestas.
-
-"""
-
 import numpy as np
 import cv2
 import streamlit as st
@@ -14,16 +8,19 @@ st.markdown("# Sistema De Calificación")
 st.markdown("Sube una imagen del documento con las respuestas correctas y luego un documento de respuestas a corregir. Una vez subidos los archivos, el sistema mostrará el puntaje obtenido por el estudiante, deslice hacia abajo para ver los resultados.")
 
 # File uploaders
-correct_answers_file = st.file_uploader("Selecciona el archivo con las respuestas correctas", type=[
-                                        "jpg", "jpeg", "png"], key="correct_answers_file")
-uploaded_file = st.file_uploader("Selecciona un documento a corregir", type=[
-                                 "jpg", "jpeg", "png"], key="answer_sheet")
-
+correct_answers_file = st.file_uploader("Selecciona el archivo con las respuestas correctas", type=["jpg", "jpeg", "png"], key="correct_answers_file")
+uploaded_file = st.file_uploader("Selecciona un documento a corregir", type=["jpg", "jpeg", "png"], key="answer_sheet")
 
 # Estado de la sesión para guardar las respuestas correctas
 if 'correct_answers' not in st.session_state:
     st.session_state['correct_answers'] = None
 
+# Clear session state variables if new files are uploaded
+if st.session_state.get('uploaded_correct_answers', False) and not correct_answers_file:
+    st.session_state['correct_answers'] = None
+if st.session_state.get('uploaded_answer_sheet', False) and not uploaded_file:
+    st.session_state['answers'] = None
+    st.session_state['paper'] = None
 
 def sort_clockwise(points):
     """
@@ -91,31 +88,34 @@ def process_image(image_file):
     return answers, paper, codes
 
 
+# Process uploaded correct answers file
 if correct_answers_file and st.session_state['correct_answers'] is None:
     answers, paper, _ = process_image(correct_answers_file)
     if answers is not None and answers != -1:
         st.session_state.correct_answers = answers
-        st.image(paper, caption="Documento con respuestas correctas",
-                 use_column_width=True)
+        st.session_state['uploaded_correct_answers'] = True
+        st.image(paper, caption="Documento con respuestas correctas", use_column_width=True)
         st.success("Respuestas correctas cargadas correctamente.")
     else:
         st.error("Error al procesar el documento con respuestas correctas.")
 
+# Process uploaded answer sheet file
 if uploaded_file and st.session_state['correct_answers'] is not None:
     answers, paper, _ = process_image(uploaded_file)
     if answers is not None and answers != -1:
         def compare_answers(student_answers, correct_answers):
             if len(student_answers) != len(correct_answers):
-                raise ValueError(
-                    "Las listas de respuestas tienen longitudes diferentes")
+                raise ValueError("Las listas de respuestas tienen longitudes diferentes")
             return sum(1 for s, c in zip(student_answers, correct_answers) if s == c)
+
+        st.session_state['answers'] = answers
+        st.session_state['paper'] = paper
+        st.session_state['uploaded_answer_sheet'] = True
 
         st.image(paper, caption="Documento escaneado", use_column_width=True)
         st.write(f"Respuestas: {answers}")
-        st.write(
-            f"Respuestas correctas: {st.session_state['correct_answers']}")
-        st.write(
-            f"Puntaje: {compare_answers(answers, st.session_state['correct_answers'])}")
+        st.write(f"Respuestas correctas: {st.session_state['correct_answers']}")
+        st.write(f"Puntaje: {compare_answers(answers, st.session_state['correct_answers'])}")
     else:
         st.error("Error al procesar el documento a corregir.")
 elif uploaded_file and st.session_state['correct_answers'] is None:
