@@ -8,6 +8,7 @@ import cv2
 import numpy as np
 from PIL import Image
 
+
 epsilon = 10
 test_sensitivity_epsilon = 10  # margen de error para la detección
 choices = ['A', 'B', 'C', 'D', 'E', '?']
@@ -89,8 +90,8 @@ def ProcessPage(paper):
                 min_arg = 5
 
             # escribir la respuesta
-            cv2.putText(paper, choices[min_arg], (x1, y1),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 150, 0), 1)
+            # cv2.putText(paper, choices[min_arg], (x1, y1),
+            #             cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 150, 0), 1)
 
             # añadir las respuestas al array
             answers.append(choices[min_arg])
