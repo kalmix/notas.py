@@ -21,3 +21,8 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py') --extension-pkg-whitelist=cv2 --disable=E0401 --output=lint.txt || true
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: lint.txt
+        path: lint.txt
