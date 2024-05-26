@@ -1,0 +1,6 @@
+[project]
+name = "notas.py"
+version = "0.1.0"
+description = "Una aplicación que procesa hojas de respuestas de exámenes y calcula las notas de los alumnos."
+requires-python = ">= 3.10"
+authors = ["Kalmix"]
