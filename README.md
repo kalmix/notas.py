@@ -13,6 +13,8 @@ pip install -r requirements.txt
 
 # Ejecución
 ```bash
-streamlit run "<Directorio>/app.py"
+python run.py
 ```
-
+```bash
+python3 run.py
+```
