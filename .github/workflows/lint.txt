@@ -1,0 +1,11 @@
+app.py:119:0: R1260: This 'if' is too complex. The McCabe rating is 18 (too-complex)
+app.py:119:0: R1260: This 'if' is too complex. The McCabe rating is 18 (too-complex)
+app.py:15:4: W0621: Redefining name 'df' from outer scope (line 211) (redefined-outer-name)
+app.py:88:4: W0621: Redefining name 'paper' from outer scope (line 145) (redefined-outer-name)
+app.py:89:4: W0621: Redefining name 'answers' from outer scope (line 145) (redefined-outer-name)
+app.py:112:4: W0621: Redefining name 'name' from outer scope (line 170) (redefined-outer-name)
+app.py:220:4: R0204: Redefinition of df type from pandas.core.frame.DataFrame to pandas.io.parsers.readers.TextFileReader (redefined-variable-type)
+app.py:220:4: R0204: Redefinition of df type from pandas.core.frame.DataFrame to pandas.io.parsers.readers.TextFileReader (redefined-variable-type)
+
+------------------------------------------------------------------
+Your code has been rated at 9.54/10 (previous run: 4.94/10, +4.60)
