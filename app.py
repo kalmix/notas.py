@@ -7,6 +7,7 @@ También se encarga de procesar las imágenes de los documentos de respuestas.
 
 import os
 import time
+import re
 import pandas as pd
 import numpy as np
 import cv2
