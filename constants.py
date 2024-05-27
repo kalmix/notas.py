@@ -1,0 +1,1 @@
+DESCRIPTION = "Sube una imagen del documento con las respuestas correctas y luego uno o varios documentos de respuestas a corregir. Una vez subidos los archivos, el sistema mostrará el puntaje obtenido por el estudiante, deslice hacia abajo para ver los resultados."
