@@ -164,8 +164,7 @@ def extract_name(image):
     header_section = image[:int(0.1 * height), :]
     gray_header = cv2.cvtColor(header_section, cv2.COLOR_BGR2GRAY)
     name = pytesseract.image_to_string(gray_header)
-    name = name.replace("\n", " ").replace("\x0c", "").replace(
-        "Matricula", "").replace("Nombre", "").replace("—", "")
+    name = re.sub(r'[^\d-]+', '', name)
     return name.strip()
 
 
