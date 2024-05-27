@@ -16,7 +16,7 @@ from page import process_page
 from constants import DESCRIPTION
 
 # INSTALA pytesseract y pon la ruta de tesseract.exe
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+#pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 # Guardar los datos de los estudiantes en un archivo CSV
 def save_to_csv(data, filename="student_data.csv"):
